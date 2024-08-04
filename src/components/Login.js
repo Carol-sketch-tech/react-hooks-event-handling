@@ -16,3 +16,7 @@ function Login() {
 }
 
 export default Login;
+// whenever we are working with a form,elements, handling the submit event is a good way to interact with all 
+// the data from the form after it being submitted.
+
+// how does react handle events 

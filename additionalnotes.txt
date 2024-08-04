@@ -1,0 +1,75 @@
+Event hancling in React 
+
+- learn how to attach event listeners to specific elements.
+
+// additional notes.
+//we attach an event listener much like we add a prop.
+// th the listener name is always comprised of on and the event name utsled for example click
+// on and an event name combine together in camel-cased, so that if we wanted to add an event listener 
+//  we would say on click.
+// this prop takes a callback function as a value.it can iether be a reference to a fucntion or an online function 
+// most if the time a reference to afunction is used.
+// note that we can also use an arrow function.
+// note that arrow function are a good choice when you do not have to handle much logic.
+// if you have more than oneline of code to run in your event handler, it is a good idea to create a seperate allback function.
+
+
+// what can we listen for events on??
+// not that for event listeners we can only attach them to DOM elements and not componenets.
+// for example 
+ function Clickable(){
+  return <button>Click Me</button>
+ }
+  function App(){
+    function handleClick(){
+      console.log("click")
+    }
+    return <Clickable onClick={handleClick}/>
+  }
+  // this will not work because the event handler or listener is attached to a component which isnot an element if the 
+  // DOM.
+  // but this will 
+  function Clickable(){
+    function handleClick(){
+      console.log("click")
+    }
+    <button onClick={handleClick}></button>
+  }
+  function App (){
+    <Clickable/>
+  }
+  //  in the example above the event listener is attached to a DOM element <button>
+  // in the first example that did not work,
+  // if we wanted to work we would pass the onClick as a prop.
+  // as follows.
+   function App(){
+    function handleClick(){
+      console.log("click!")
+    }
+    return (<Clickable onClick={handleClick}/>)// the onClick is passed the hadleclick functino and passed as a prop
+   }
+   // how does the child componenet receive the prop passed in the parent component.
+    function Clickable({onClick}){
+      return <button onClick={onClick}>Click me</button>
+    }
+
+
+
+    
+function MultiButton(){
+  function handleClick(number){
+    console.log(`Botton${number} was clicked`)
+  }
+  return (
+    <div>
+      <button onClick={()=>handleClick(1)}>Button 1</button>
+      <button onClick={()=>handleClick(2)}>Button 2</button>
+      <button onClick={()=>handleClick(3)}>Button 3</button>
+    </div>
+  );
+}
+// when one of the buttons is clicked we want the callbakc to log out the button's number.
+// if a button is clikced, the event object will be logged not the number of the button.
+// this is why we need to provide a function defination, not a function invocation to our event handlers.
+// by having an arrow function were providing each of our button's onClick handlers a function defination that will only be invoked when the 
+// button is clicked.
